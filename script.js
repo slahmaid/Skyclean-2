@@ -21,6 +21,7 @@
   const scrollToEl = (el) => {
     if (!lenis) { el.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' }); return; }
     const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    lenis.resize();
     lenis.scrollTo(el, { offset: -(header.offsetHeight + margin), duration: 1.3, easing: (t) => 1 - Math.pow(1 - t, 4) });
   };
 
@@ -51,7 +52,7 @@
   const unlock = () => {
     body.classList.remove('menu-locked');
     body.style.top = '';
-    if (lenis) lenis.start();
+    if (lenis) { lenis.start(); lenis.resize(); }
     jumpTo(savedY);
   };
 
